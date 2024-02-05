@@ -11,3 +11,7 @@ class Movs(str, Enum):
     BACK = "b"
     LEFT = "l"
     RIGTH = "r"
+
+class Steps(int, Enum):
+    FORWARD = 1
+    BACK = -1

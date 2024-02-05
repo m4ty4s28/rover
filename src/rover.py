@@ -1,5 +1,5 @@
 
-from src.enumerates import Points, Movs
+from src.enumerates import Points, Movs, Steps
 
 class Rover():
     def __init__(self, x, y, direction, rocks=None):
@@ -27,35 +27,20 @@ class Rover():
 
     def next_position(self, next_mov):
         rock = False
-        if next_mov == Movs.FORWARD and self.forward() and self.check_position():
-            self.back()
+        if next_mov == Movs.FORWARD and self.forward_back(Steps.FORWARD) and self.check_position():
+            self.forward_back(Steps.BACK)
             rock = True
-        elif next_mov == Movs.BACK and self.back() and self.check_position():
-            self.forward()
+        elif next_mov == Movs.BACK and self.forward_back(Steps.BACK) and self.check_position():
+            self.forward_back(Steps.FORWARD)
             rock = True
         if rock:
             raise Exception('Rock')
-
-    def forward(self):
-        if self.direction == Points.NORTH:
-            self.y += 1
-        elif self.direction == Points.SOUTH:
-            self.y -= 1
-        elif self.direction == Points.EAST:
-            self.x += 1
-        elif self.direction == Points.WEST:
-            self.x -= 1
-        return True
-
-    def back(self):
-        if self.direction == Points.NORTH:
-            self.y -= 1
-        elif self.direction == Points.SOUTH:
-            self.y += 1
-        elif self.direction == Points.EAST:
-            self.x -= 1
-        elif self.direction == Points.WEST:
-            self.x += 1
+    
+    def forward_back(self, step):
+        if self.direction == Points.NORTH or self.direction == Points.SOUTH:
+            self.y += step * (Steps.FORWARD if self.direction == Points.NORTH else Steps.BACK)
+        elif self.direction == Points.EAST or self.direction == Points.WEST:
+            self.x += step * (Steps.FORWARD if self.direction == Points.EAST else Steps.BACK)
         return True
 
     def left(self):

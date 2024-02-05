@@ -4,20 +4,20 @@ from src.enumerates import Points
 
 def test_mov_x():
     rover = Rover(0,0,Points.EAST)
-    rover.forward()
+    rover.forward_back(1)
     assert rover.x == 1
 
     rover = Rover(0,0,Points.WEST)
-    rover.forward()
+    rover.forward_back(1)
     assert rover.x == -1
 
     rover = Rover(1,1,Points.WEST)
-    rover.forward()
+    rover.forward_back(1)
     assert rover.x == 0
 
 def test_mov_y():
     rover = Rover(0,0,Points.NORTH)
-    rover.forward()
+    rover.forward_back(1)
     assert rover.y == 1
 
 def test_mov_r():
@@ -59,21 +59,21 @@ def mov_rock_b2():
     rover.move(cadena)
 
 def test_mov_rock_f():
-    with pytest.raises(Exception) as excinfo:   
+    with pytest.raises(Exception) as excinfo:
         mov_rock_f()
     assert str(excinfo.value) == 'Rock'
 
 def test_mov_rock_f2():
-    with pytest.raises(Exception) as excinfo:   
+    with pytest.raises(Exception) as excinfo:
         mov_rock_f2()
     assert str(excinfo.value) == 'Rock'
 
 def test_mov_rock_b():
-    with pytest.raises(Exception) as excinfo:   
+    with pytest.raises(Exception) as excinfo:
         mov_rock_b()
     assert str(excinfo.value) == 'Rock'
 
 def test_mov_rock_b2():
-    with pytest.raises(Exception) as excinfo:   
+    with pytest.raises(Exception) as excinfo:
         mov_rock_b2()
     assert str(excinfo.value) == 'Rock'
